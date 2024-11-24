@@ -41,14 +41,25 @@ def get_sentiment(text):
         sentiment = 'Neutral'
     return sentiment
 
-# Get input text from the user
-user_input = input("Enter a phrase to analyze sentiment: ")
+# Loop to get input from the user
+while True:
+    user_input = input("Enter a phrase to analyze sentiment: ")
+    # Preprocess the input text
+    processed_text = preprocess_text(user_input)
+    # Analyze the sentiment
+    sentiment = get_sentiment(processed_text)
+    # Output the sentiment
+    print("The sentiment of the phrase is:", sentiment)
+    print()  # Add an empty line for better readability
+
+    # Ask if the user wants to analyze another phrase
+    again = input("Do you want to analyze another phrase? (yes/no): ")
+    if again.lower() != 'yes':
+        print("Exiting the program.")
+        break
 
 # Preprocess the input text
 processed_text = preprocess_text(user_input)
 
 # Analyze the sentiment
 sentiment = get_sentiment(processed_text)
-
-# Output the sentiment
-print("The sentiment of the phrase is:", sentiment)
