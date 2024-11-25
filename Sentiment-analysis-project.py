@@ -38,12 +38,11 @@ while True:
     processed_text = preprocess_text(user_input)
     sentiment = get_sentiment(processed_text)
     print("The sentiment of the phrase is:", sentiment)
-    print()
 
     again = input("Do you want to analyze another phrase? (yes/no): ")
     if again.lower() != 'yes':
         print("Exiting the program.")
         break
 
-processed_text = preprocess_text(user_input)
-sentiment = get_sentiment(processed_text)
+processed_text = preprocess_text()
+sentiment = get_sentiment()
