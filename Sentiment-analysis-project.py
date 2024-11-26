@@ -6,6 +6,7 @@ from nltk.stem import WordNetLemmatizer
 
 nltk.download('vader_lexicon')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
@@ -44,5 +45,3 @@ while True:
         print("Exiting the program.")
         break
 
-processed_text = preprocess_text()
-sentiment = get_sentiment()
