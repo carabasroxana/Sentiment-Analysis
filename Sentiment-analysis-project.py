@@ -30,14 +30,15 @@ sentiment_analyzer_ro = pipeline(
 def detect_language(text):
     try:
         lang = detect(text)
-        if lang.startswith('en'):
-            return 'en'
-        elif lang.startswith('ro'):
-            return 'ro'
-        else:
-            return 'en'
     except:
-        return 'en'
+        lang = 'en'
+
+    if lang == 'ro':
+        doc = nlp_ro(text)
+        if len(doc) == 0:  # If spaCy cannot parse it as Romanian, default to English
+            lang = 'en'
+
+    return lang
 
 def preprocess_text(text, lang):
     tokens = word_tokenize(text.lower())
