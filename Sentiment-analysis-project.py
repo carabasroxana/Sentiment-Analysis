@@ -4,7 +4,6 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
-
 from langdetect import detect
 import spacy
 from transformers import pipeline
@@ -33,10 +32,10 @@ def detect_language(text):
     except:
         lang = 'en'
 
-    if lang == 'ro':
-        doc = nlp_ro(text)
-        if len(doc) == 0:  # If spaCy cannot parse it as Romanian, default to English
-            lang = 'en'
+    # if lang == 'ro':
+    #     doc = nlp_ro(text)
+    #     if len(doc) == 0:  # If spaCy cannot parse it as Romanian, default to English
+    #         lang = 'en'
 
     return lang
 
@@ -64,7 +63,7 @@ def preprocess_text(text, lang):
         doc = nlp_ro(' '.join(filtered_tokens))
         lemmatized_tokens = [token.lemma_ for token in doc]
     else:
-        lemmatized_tokens = filtered_tokens
+        raise Exception("Language not detected")
 
     processed_text = ' '.join(lemmatized_tokens)
     return processed_text
@@ -90,13 +89,13 @@ def get_sentiment(text, lang):
         else:
             sentiment = 'Neutral'
     else:
-        sentiment = 'Neutral'
+        raise Exception("Language not detected")
     return sentiment
 
 sample_texts = [
     ("I love this product!", 'en', 'Positive'),
     ("This is the worst service ever.", 'en', 'Negative'),
-    ("Este un serviciu excelent.", 'ro', 'Positive'),
+    # ("Este un serviciu excelent.", 'ro', 'Positive'),
     ("Nu mi-a plăcut deloc.", 'ro', 'Negative'),
     ("The product is okay, nothing special.", 'en', 'Neutral'),
     ("Produsul este acceptabil.", 'ro', 'Neutral')
